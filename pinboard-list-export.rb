@@ -23,6 +23,11 @@ optparse = OptionParser.new do |opts|
     @options[:password] = pwd
   end
   
+  @options[:format] = false
+  opts.on('-f', '--format FORMAT', 'output format: html, markdown') do |f|
+    @options[:format] = f
+  end
+  
   opts.on('-h', '--help', 'Displays this screen') do 
     puts opts
     exit
@@ -32,7 +37,11 @@ end
   
 optparse.parse!
 
-@html = "<ul>"
+@output = ""
+
+if(!@options[:format] || @options[:format] == "html")
+  @output << "<ul>\n"
+end
 
 if(!@options[:user])
   print "User: "
@@ -49,10 +58,15 @@ if(@options[:tags])
   posts = pinboard.posts()
   posts.each do |p|
     if p.tag.include?(@options[:tags])
-      @html << "<li><a href='#{p.href}'>#{p.description}</a></li>" 
+	    if(!@options[:format] || @options[:format] == "html")
+        @output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
+      elsif(@options[:format] == "markdown")
+        @output << "*   [#{p.description}](#{p.href})\n"
+      end
     end
   end
-  
-  @html << "</ul>"
-  puts @html
+  if(!@options[:format] || @options[:format] == "html")
+    @output << "</ul>"
+  end
+  puts @output
 end
