@@ -55,16 +55,16 @@ end
 
 if(@options[:tags])
   pinboard = Pinboard::Client.new(:username => @options[:user], :password => @options[:password])
-  posts = pinboard.posts()
+  
+	posts = pinboard.posts(:tag => @options[:tags])
+
   posts.each do |p|
-    if p.tag.include?(@options[:tags])
-	    if(!@options[:format] || @options[:format] == "html")
-        @output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
-      elsif(@options[:format] == "markdown")
-        @output << "*   [#{p.description}](#{p.href})\n"
-      end
-    end
-  end
+    if(!@options[:format] || @options[:format] == "html")
+       @output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
+     elsif(@options[:format] == "markdown")
+       @output << "*   [#{p.description}](#{p.href})\n"
+     end
+   end
   if(!@options[:format] || @options[:format] == "html")
     @output << "</ul>"
   end
