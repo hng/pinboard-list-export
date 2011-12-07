@@ -24,7 +24,7 @@ optparse = OptionParser.new do |opts|
   end
   
   @options[:format] = false
-  opts.on('-f', '--format FORMAT', 'output format: html, markdown') do |f|
+  opts.on('-f', '--format FORMAT', 'output format: html, markdown, textile') do |f|
     @options[:format] = f
   end
   
@@ -61,10 +61,12 @@ if(@options[:tags])
   posts.each do |p|
     if(!@options[:format] || @options[:format] == "html")
        @output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
-     elsif(@options[:format] == "markdown")
+    elsif(@options[:format] == "markdown")
        @output << "*   [#{p.description}](#{p.href})\n"
-     end
-   end
+		elsif(@options[:format] == "textile")
+			@output << "*   \"#{p.description}\":#{p.href}\n"
+    end
+  end
   if(!@options[:format] || @options[:format] == "html")
     @output << "</ul>"
   end
