@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+#
+# Needs my pinboard gem fork
+#
 require 'optparse'
 require 'pinboard'
 
@@ -60,19 +63,20 @@ if(@options[:tags])
 
   posts.each do |p|
     if(!@options[:format] || @options[:format] == "html")
-       @output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
+       	@output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
     elsif(@options[:format] == "markdown")
-       @output << "*   [#{p.description}](#{p.href})\n"
-		elsif(@options[:format] == "textile")
-			@output << "*   \"#{p.description}\":#{p.href}\n"
-		elsif(@options[:format] == "wiki")
-			@output << "*   [#{p.href} #{p.description}]\n"
-		end
+       	@output << "*   [#{p.description}](#{p.href})\n"
+    elsif(@options[:format] == "textile")
+       	@output << "*   \"#{p.description}\":#{p.href}\n"
+    elsif(@options[:format] == "wiki")
+	@output << "*   [#{p.href} #{p.description}]\n"
+    end
   end
 	
-	if(!@options[:format] || @options[:format] == "html")
+  if(!@options[:format] || @options[:format] == "html")
     @output << "</ul>"
-	end
+  end
   
-	puts @output
+  puts @output
+
 end
