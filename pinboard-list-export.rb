@@ -74,6 +74,7 @@ if(@options[:tags])
       end
     end
 	
+
     if(!@options[:format] || @options[:format] == "html")
       @output << "</ul>"
     end
