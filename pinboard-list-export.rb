@@ -60,23 +60,28 @@ if(@options[:tags])
   pinboard = Pinboard::Client.new(:username => @options[:user], :password => @options[:password])
   
 	posts = pinboard.posts(:tag => @options[:tags])
-
-  posts.each do |p|
-    if(!@options[:format] || @options[:format] == "html")
-       	@output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
-    elsif(@options[:format] == "markdown")
-       	@output << "*   [#{p.description}](#{p.href})\n"
-    elsif(@options[:format] == "textile")
-       	@output << "*   \"#{p.description}\":#{p.href}\n"
-    elsif(@options[:format] == "wiki")
-	@output << "*   [#{p.href} #{p.description}]\n"
-    end
-  end
 	
-  if(!@options[:format] || @options[:format] == "html")
-    @output << "</ul>"
+	if !posts.nil?
+    posts.each do |p|
+      if(!@options[:format] || @options[:format] == "html")
+         	@output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
+      elsif(@options[:format] == "markdown")
+         	@output << "*   [#{p.description}](#{p.href})\n"
+      elsif(@options[:format] == "textile")
+         	@output << "*   \"#{p.description}\":#{p.href}\n"
+      elsif(@options[:format] == "wiki")
+  	@output << "*   [#{p.href} #{p.description}]\n"
+      end
+    end
+	
+    if(!@options[:format] || @options[:format] == "html")
+      @output << "</ul>"
+    end
+  
+    puts @output
+  else
+    puts "No bookmarks found."
   end
   
-  puts @output
 
 end
