@@ -1,8 +1,16 @@
+# 
+#  pinboard-list-export.rb
+#  
+#  
+#  Created by Henning Schumann 
+#  Copyright 2011 Henning Schumann. MIT-License (see README).
+#
+#  Homepage: http://github.com/hng/pinboard-list-export
+#  Usage: See pinboard-list-export.rb --help 
+
+
 #!/usr/bin/env ruby
 
-#
-# Needs my pinboard gem fork
-#
 require 'optparse'
 require 'pinboard'
 
@@ -12,7 +20,7 @@ optparse = OptionParser.new do |opts|
   opts.banner = "Usage: pinboard-list-export.rb [options]"
 
   @options[:tags] = false
-  opts.on('-t', '--tags TAGS', 'pinboard tags to export into list') do |tags|
+  opts.on('-t', '--tags TAGS', 'pinboard tags to export into list (separated by comma)') do |tags|
     @options[:tags] = tags
   end
   
@@ -27,7 +35,7 @@ optparse = OptionParser.new do |opts|
   end
   
   @options[:format] = false
-  opts.on('-f', '--format FORMAT', 'output format: html, markdown, textile, wiki') do |f|
+  opts.on('-f', '--format FORMAT', 'output format: html (default), markdown, textile, wiki') do |f|
     @options[:format] = f
   end
   
