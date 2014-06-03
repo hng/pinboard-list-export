@@ -12,7 +12,7 @@ Usage
     	-t, --tags TAGS                  pinboard tags to export into list (separated by comma)
     	-u, --user USER                  pinboard username
     	-p, --password PASSWORD          pinboard password
-    	-f, --format FORMAT              output format: html (default), markdown, textile, wiki
+    	-f, --format FORMAT              output format: html (default), markdown, textile, wiki, text
     	-h, --help                       Displays this screen
 
 Dependencies
