@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # 
 #  pinboard-list-export.rb
 #  
@@ -7,9 +8,6 @@
 #
 #  Homepage: http://github.com/hng/pinboard-list-export
 #  Usage: See pinboard-list-export.rb --help 
-
-
-#!/usr/bin/env ruby
 
 require 'optparse'
 require 'pinboard'
