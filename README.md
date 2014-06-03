@@ -1,7 +1,7 @@
 Pinboard List Export
 ====================
 
-Exports a list of links, filtered by at least one tag, from a pinboard account. Currently supports HTML, Markdown, textile, and mediawiki-markup as output formats. 
+Exports a list of links, filtered by at least one tag, from a [Pinboard](https://pinboard.in) account. Currently supports HTML, Markdown, Textile, MediaWiki-markup, and pure text as output formats. 
 
 Homepage: http://github.com/hng/pinboard-list-export
 
