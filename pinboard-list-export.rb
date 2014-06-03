@@ -35,7 +35,7 @@ optparse = OptionParser.new do |opts|
   end
   
   @options[:format] = false
-  opts.on('-f', '--format FORMAT', 'output format: html (default), markdown, textile, wiki') do |f|
+  opts.on('-f', '--format FORMAT', 'output format: html (default), markdown, textile, wiki, text') do |f|
     @options[:format] = f
   end
   
@@ -72,13 +72,17 @@ if(@options[:tags])
 	if !posts.nil?
     posts.each do |p|
       if(!@options[:format] || @options[:format] == "html")
-         	@output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
+        @output << "<li><a href='#{p.href}'>#{p.description}</a></li>\n" 
       elsif(@options[:format] == "markdown")
-         	@output << "*   [#{p.description}](#{p.href})\n"
+        @output << "*   [#{p.description}](#{p.href})\n"
       elsif(@options[:format] == "textile")
-         	@output << "*   \"#{p.description}\":#{p.href}\n"
+        @output << "*   \"#{p.description}\":#{p.href}\n"
       elsif(@options[:format] == "wiki")
-  	@output << "*   [#{p.href} #{p.description}]\n"
+        @output << "*   [#{p.href} #{p.description}]\n"
+      elsif(@options[:format] == "text")
+        @output << "\t-\t#{p.description}: <#{p.href}>\n"
+        @output << "\t\t#{p.extended}\n" unless p.extended.empty?
+        @output << "\n"
       end
     end
 	
